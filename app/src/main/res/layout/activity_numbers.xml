@@ -23,4 +23,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.miwok.NumbersActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="jean" />
+
 </RelativeLayout>
