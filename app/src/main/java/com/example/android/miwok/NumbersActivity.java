@@ -17,6 +17,7 @@ package com.example.android.miwok;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class NumbersActivity extends AppCompatActivity {
 
@@ -24,5 +25,24 @@ public class NumbersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
+
+        //Display numbers from 1 to 10
+
+        String[] words = new String[10];
+        words[0] = "One";
+        words[1] = "Two";
+        words[2] = "Three";
+        words[3] = "Four";
+        words[4] = "Five";
+        words[5] = "Six";
+        words[6] = "Seven";
+        words[7] = "Eight";
+        words[8] = "Nine";
+        words[9] = "Ten";
+
+        for (int i = 0; i < words.length; i++) {
+            Log.v("JeanLogV", words[i]);
+        }
+
     }
 }
