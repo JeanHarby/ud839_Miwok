@@ -15,34 +15,64 @@
  */
 package com.example.android.miwok;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers);
+        setContentView(R.layout.activity_word);
+        try {
 
-        //Display numbers from 1 to 10
+            //Display numbers from 1 to 10 3 times
 
-        String[] words = new String[10];
-        words[0] = "One";
-        words[1] = "Two";
-        words[2] = "Three";
-        words[3] = "Four";
-        words[4] = "Five";
-        words[5] = "Six";
-        words[6] = "Seven";
-        words[7] = "Eight";
-        words[8] = "Nine";
-        words[9] = "Ten";
+            ArrayList<Word> words = new ArrayList<Word>();
+            words.add(new Word("lutti", "One", R.drawable.number_one));
+            words.add(new Word("otiiko", "Two", R.drawable.number_two));
+            words.add(new Word("tolookosu", "Three", R.drawable.number_three));
+            words.add(new Word("oyyisa", "Four", R.drawable.number_four));
+            words.add(new Word("massokka", "Five", R.drawable.number_five));
+            words.add(new Word("temmokka", "Six", R.drawable.number_six));
+            words.add(new Word("kenekaku", "Seven", R.drawable.number_seven));
+            words.add(new Word("kawinta", "Eight", R.drawable.number_eight));
+            words.add(new Word("wo’e", "Nine", R.drawable.number_nine));
+            words.add(new Word("na’aacha", "Ten", R.drawable.number_ten));
 
-        for (int i = 0; i < words.length; i++) {
-            Log.v("JeanLogV", words[i]);
+            words.add(new Word("lutti", "One", R.drawable.number_one));
+            words.add(new Word("otiiko", "Two", R.drawable.number_two));
+            words.add(new Word("tolookosu", "Three", R.drawable.number_three));
+            words.add(new Word("oyyisa", "Four", R.drawable.number_four));
+            words.add(new Word("massokka", "Five", R.drawable.number_five));
+            words.add(new Word("temmokka", "Six", R.drawable.number_six));
+            words.add(new Word("kenekaku", "Seven", R.drawable.number_seven));
+            words.add(new Word("kawinta", "Eight", R.drawable.number_eight));
+            words.add(new Word("wo’e", "Nine", R.drawable.number_nine));
+            words.add(new Word("na’aacha", "Ten", R.drawable.number_ten));
+//        Carry LinearLayout on Object
+//        LinearLayout rootView = (LinearLayout)findViewById(R.id.RootView);
+
+//        for (int i = 0; i < words.size() ; i++) {
+//            TextView wordTextView = new TextView(this);
+//            wordTextView.setText(words.get(i));
+//            rootView.addView(wordTextView);
+////            Log.v("JeanLogV", words.get(i));
+//        }
+
+            WordAdapter adapter = new WordAdapter(this, words, R.color.category_numbers);
+
+            ListView listView = (ListView) findViewById(R.id.list);
+
+            listView.setAdapter(adapter);
+
+        } catch (Exception e) {
+            // This will catch any exception, because they are all descended from Exception
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
     }
 }

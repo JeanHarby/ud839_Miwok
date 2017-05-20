@@ -17,12 +17,45 @@ package com.example.android.miwok;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class PhrasesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phrases);
+        setContentView(R.layout.activity_word);
+
+        ArrayList<Word> words = new ArrayList<Word>();
+        words.add(new Word("minto wuksus", "Where are you going?"));
+        words.add(new Word("tinnә oyaase'nә", "What is your name?"));
+        words.add(new Word("oyaaset", "My name is..."));
+        words.add(new Word("michәksәs?", "daughter"));
+        words.add(new Word("taachi", "older brother"));
+        words.add(new Word("teṭe", "How are you feeling?"));
+        words.add(new Word("kuchi achit", "I’m feeling good."));
+        words.add(new Word("әәnәs'aa?", "Are you coming?"));
+        words.add(new Word("hәә’ әәnәm", "Yes, I’m coming."));
+        words.add(new Word("әnni'nem", "Come here."));
+
+//        Carry LinearLayout on Object
+//        LinearLayout rootView = (LinearLayout)findViewById(R.id.RootView);
+
+//        for (int i = 0; i < words.size() ; i++) {
+//            TextView wordTextView = new TextView(this);
+//            wordTextView.setText(words.get(i));
+//            rootView.addView(wordTextView);
+////            Log.v("JeanLogV", words.get(i));
+//        }
+
+        WordAdapter adapter = new WordAdapter(this, words, R.color.category_phrases);
+
+        ListView listView = (ListView) findViewById(R.id.list);
+
+        listView.setAdapter(adapter);
+
+
     }
 }
