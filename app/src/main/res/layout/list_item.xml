@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:layout_weight="2">
 
         <TextView
             android:id="@+id/miwok_text_view"
@@ -35,4 +36,11 @@
             android:paddingLeft="16dp"
             tools:text="Miwok Text" />/>
     </LinearLayout>
+    <!--<Button-->
+    <!--android:id="@+id/PlaySound"-->
+    <!--android:layout_width="48dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:paddingTop="24dp"-->
+    <!--android:background="@drawable/family_son"-->
+    <!--android:onClick="playSound"/>-->
 </LinearLayout>

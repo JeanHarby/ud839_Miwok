@@ -15,8 +15,11 @@
  */
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,43 +35,38 @@ public class NumbersActivity extends AppCompatActivity {
 
             //Display numbers from 1 to 10 3 times
 
-            ArrayList<Word> words = new ArrayList<Word>();
-            words.add(new Word("lutti", "One", R.drawable.number_one));
-            words.add(new Word("otiiko", "Two", R.drawable.number_two));
-            words.add(new Word("tolookosu", "Three", R.drawable.number_three));
-            words.add(new Word("oyyisa", "Four", R.drawable.number_four));
-            words.add(new Word("massokka", "Five", R.drawable.number_five));
-            words.add(new Word("temmokka", "Six", R.drawable.number_six));
-            words.add(new Word("kenekaku", "Seven", R.drawable.number_seven));
-            words.add(new Word("kawinta", "Eight", R.drawable.number_eight));
-            words.add(new Word("wo’e", "Nine", R.drawable.number_nine));
-            words.add(new Word("na’aacha", "Ten", R.drawable.number_ten));
-
-            words.add(new Word("lutti", "One", R.drawable.number_one));
-            words.add(new Word("otiiko", "Two", R.drawable.number_two));
-            words.add(new Word("tolookosu", "Three", R.drawable.number_three));
-            words.add(new Word("oyyisa", "Four", R.drawable.number_four));
-            words.add(new Word("massokka", "Five", R.drawable.number_five));
-            words.add(new Word("temmokka", "Six", R.drawable.number_six));
-            words.add(new Word("kenekaku", "Seven", R.drawable.number_seven));
-            words.add(new Word("kawinta", "Eight", R.drawable.number_eight));
-            words.add(new Word("wo’e", "Nine", R.drawable.number_nine));
-            words.add(new Word("na’aacha", "Ten", R.drawable.number_ten));
-//        Carry LinearLayout on Object
-//        LinearLayout rootView = (LinearLayout)findViewById(R.id.RootView);
-
-//        for (int i = 0; i < words.size() ; i++) {
-//            TextView wordTextView = new TextView(this);
-//            wordTextView.setText(words.get(i));
-//            rootView.addView(wordTextView);
-////            Log.v("JeanLogV", words.get(i));
-//        }
+            final ArrayList<Word> words = new ArrayList<Word>();
+            words.add(new Word("lutti", "One", R.drawable.number_one, R.raw.number_one));
+            words.add(new Word("otiiko", "Two", R.drawable.number_two, R.raw.number_two));
+            words.add(new Word("tolookosu", "Three", R.drawable.number_three, R.raw.number_three));
+            words.add(new Word("oyyisa", "Four", R.drawable.number_four, R.raw.number_four));
+            words.add(new Word("massokka", "Five", R.drawable.number_five, R.raw.number_five));
+            words.add(new Word("temmokka", "Six", R.drawable.number_six, R.raw.number_six));
+            words.add(new Word("kenekaku", "Seven", R.drawable.number_seven, R.raw.number_seven));
+            words.add(new Word("kawinta", "Eight", R.drawable.number_eight, R.raw.number_eight));
+            words.add(new Word("wo’e", "Nine", R.drawable.number_nine, R.raw.number_eight));
+            words.add(new Word("na’aacha", "Ten", R.drawable.number_ten, R.raw.number_ten));
 
             WordAdapter adapter = new WordAdapter(this, words, R.color.category_numbers);
 
             ListView listView = (ListView) findViewById(R.id.list);
 
             listView.setAdapter(adapter);
+
+            //play sound file
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Word word = words.get(i);
+
+                    MediaPlayer mediaPlayer = MediaPlayer.create(NumbersActivity.this, word.getSoundFile());
+
+                    mediaPlayer.start();
+
+                    Toast.makeText(NumbersActivity.this, word.getDefaultTranslation(), Toast.LENGTH_LONG).show();
+                }
+            });
 
         } catch (Exception e) {
             // This will catch any exception, because they are all descended from Exception
