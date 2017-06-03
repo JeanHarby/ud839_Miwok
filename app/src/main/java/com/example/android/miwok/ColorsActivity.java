@@ -16,8 +16,8 @@
 package com.example.android.miwok;
 
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,6 +26,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
+    MediaPlayer mediaPlayer;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseMedia();
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +80,31 @@ public class ColorsActivity extends AppCompatActivity {
 
                 Word word = words.get(i);
 
-                MediaPlayer mediaPlayer = MediaPlayer.create(ColorsActivity.this, word.getSoundFile());
+                releaseMedia();
+
+                mediaPlayer = MediaPlayer.create(ColorsActivity.this, word.getSoundFile());
 
                 mediaPlayer.start();
 
-                Toast.makeText(ColorsActivity.this, word.getDefaultTranslation(), Toast.LENGTH_LONG).show();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        releaseMedia();
+                    }
+                });
+
+
             }
         });
+    }
+
+    private void releaseMedia() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+
+            mediaPlayer = null;
+            Toast.makeText(ColorsActivity.this, "cleared", Toast.LENGTH_LONG).show();
+        }
     }
 }

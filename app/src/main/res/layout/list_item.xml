@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:drawSelectorOnTop="true">
 
     <ImageView
         android:id="@+id/ImgResId"
